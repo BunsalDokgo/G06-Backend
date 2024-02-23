@@ -182,7 +182,7 @@ exports.getImage = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json({ imagePath: user.imagePath });
+    res.json({ imagePath: user.imagePath, username: user.username });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
