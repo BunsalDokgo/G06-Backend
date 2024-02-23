@@ -118,7 +118,16 @@ exports.resetPassword = async (req, res) => {
     );
 
     if (passwordIsValid) {
+      if (!newPwd) return res.status(400).send({
+        message: "New password is required !"
+      })
+
+      if (!confirmNewPwd) return res.status(400).send({
+        message: "Please confirm your password !"
+      })
+
       const newPasswordIsValid = newPwd === confirmNewPwd;
+
       if (newPasswordIsValid) {
         user.password = bcrypt.hashSync(newPwd, 8);
         await user.save();
@@ -131,6 +140,9 @@ exports.resetPassword = async (req, res) => {
         });
       }
     }
+    return res.status(400).send({
+      message: "Current Password is Incorrect!"
+    })
 
   } catch (err) {
     res.status(500).send({ message: err.message });
