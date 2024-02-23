@@ -161,13 +161,13 @@ exports.uploadProfile = async (req, res) => {
       await user.save();
       res.status(200).json({ 
         imagePath,
-        message: 'Image uploaded successfully'
+        message: 'Profile uploaded successfully'
       });
     } else {
       throw new Error('User not found');
     }
   } catch (error) {
-    res.status(500).json({ error: 'Failed to upload image' });
+    res.status(500).json({ error: 'Failed to upload profile' });
   }
 }
 
