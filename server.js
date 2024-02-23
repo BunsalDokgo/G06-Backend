@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const path = require('path');
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use(
   cookieSession({
     name: "bezkoder-session",
@@ -33,11 +37,6 @@ const db = require("./app/models");
 const Role = db.role;
 
 db.sequelize.sync();
-// force: true will drop the table if it already exists
-// db.sequelize.sync({force: true}).then(() => {
-//   console.log('Drop and Resync Database with { force: true }');
-//   initial();
-// });
 
 // simple route
 app.get("/", (req, res) => {

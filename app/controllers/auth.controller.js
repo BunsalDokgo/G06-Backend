@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const path = require('path');
 
 const Op = db.Sequelize.Op;
 
@@ -83,6 +84,7 @@ exports.signin = async (req, res) => {
       id: user.id,
       username: user.username,
       email: user.email,
+      imagePath: user.imagePath,
       roles: authorities,
       message: 'login successfully !'
     });
@@ -160,7 +162,7 @@ exports.uploadProfile = async (req, res) => {
       user.imagePath = imagePath;
       await user.save();
       res.status(200).json({ 
-        imagePath,
+        imagePath: `/uploads/${path.basename(imagePath)}`,
         message: 'Profile uploaded successfully'
       });
     } else {
