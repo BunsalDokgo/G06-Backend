@@ -1,5 +1,5 @@
 {
-  "name": "node-js-express-login-example",
+  "name": "group6-backend",
   "version": "1.0.0",
   "description": "Node.js Express Login and Registration example",
   "main": "server.js",
@@ -17,7 +17,7 @@
     "authorization",
     "mysql"
   ],
-  "author": "bezkoder",
+  "author": "group6",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

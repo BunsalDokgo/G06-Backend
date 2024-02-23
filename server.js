@@ -25,7 +25,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   cookieSession({
-    name: "bezkoder-session",
+    name: "group6-session",
     keys: ["COOKIE_SECRET"], // should use as secret environment variable
     httpOnly: true,
     sameSite: 'strict'
