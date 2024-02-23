@@ -154,7 +154,7 @@ exports.uploadProfile = async (req, res) => {
     const imagePath = req.file.path;
     const id = req.body.id;
 
-    const user = await User.findOne({ _id: id });
+    const user = await User.findOne({ where: { id } });
 
     if (user) {
       user.imagePath = imagePath;

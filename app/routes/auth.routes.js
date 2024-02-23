@@ -12,7 +12,12 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage })
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') cb(null, true);
+  else cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
+}
+
+const upload = multer({ storage, fileFilter })
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -36,6 +41,6 @@ module.exports = function(app) {
 
   app.post("/api/auth/signout", controller.signout);
   app.put("/api/auth/reset-password", controller.resetPassword);
-  app.post("/api/auth/upload-profile", upload.single('profile'), controller.uploadProfile);
+  app.post("/api/auth/upload-profile", upload.single('image'), controller.uploadProfile);
   app.get("/api/auth/get-profile/:id", controller.getImage);
 };
